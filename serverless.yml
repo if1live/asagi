@@ -18,6 +18,9 @@ provider:
   stage: dev
   region: ap-northeast-2
 
+  environment:
+    TELEGRAM_TOKEN: ${env:TELEGRAM_TOKEN}
+
 package:
   exclude:
     - ./**
@@ -35,3 +38,9 @@ functions:
           path: asagi/echo
           method: post
           private: true
+  bot:
+    handler: bin/bot
+    events:
+      - http:
+          path: bot
+          method: post
