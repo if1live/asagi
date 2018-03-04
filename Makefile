@@ -1,0 +1,2 @@
+build:
+	bash build.bat
