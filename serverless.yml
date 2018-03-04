@@ -19,6 +19,4 @@ functions:
     events:
       - http:
           path: asagi/echo
-          method:
-            - get
-            - post
+          method: get
