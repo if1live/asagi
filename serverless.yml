@@ -1,0 +1,24 @@
+service: asagi
+
+provider:
+  name: aws
+  runtime: go1.x
+
+  stage: dev
+  region: ap-northeast-2
+
+package:
+  exclude:
+    - ./**
+  include:
+    - ./bin/**
+
+functions:
+  echo:
+    handler: bin/echo
+    events:
+      - http:
+          path: asagi/echo
+          method:
+            - get
+            - post
