@@ -4,6 +4,17 @@ provider:
   name: aws
   runtime: go1.x
 
+  apiKeys:
+    - ${env:MY_API_KEY}
+  usagePlan:
+    quota:
+      limit: 5000
+      offset: 2
+      period: MONTH
+    throttle:
+      burstLimit: 200
+      rateLimit: 100
+
   stage: dev
   region: ap-northeast-2
 
@@ -23,3 +34,4 @@ functions:
       - http:
           path: asagi/echo
           method: post
+          private: true

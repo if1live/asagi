@@ -19,3 +19,6 @@ vendor
 ## serverless
 bin/*
 .serverless
+
+## environment
+.env
