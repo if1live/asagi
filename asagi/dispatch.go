@@ -6,6 +6,14 @@ import (
 )
 
 func Dispatch(update tgbotapi.Update, bot *tgbotapi.BotAPI) {
+	if update.Message != nil {
+		dispatchMessage(update, bot)
+	} else if update.CallbackQuery != nil {
+		dispatchCallbackQuery(update, bot)
+	}
+}
+
+func dispatchMessage(update tgbotapi.Update, bot *tgbotapi.BotAPI) {
 	cmds := []commands.Command{
 		commands.NewEcho(update),
 		commands.NewTweetByShare(update),
@@ -24,4 +32,10 @@ func Dispatch(update tgbotapi.Update, bot *tgbotapi.BotAPI) {
 			break
 		}
 	}
+}
+
+func dispatchCallbackQuery(update tgbotapi.Update, bot *tgbotapi.BotAPI) {
+	// TODO 키보드 이외의 것도 지원하도록 구현하기
+	cmd := commands.NewDevKeyboard(update)
+	cmd.Callback(update, bot)
 }
