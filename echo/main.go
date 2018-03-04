@@ -2,6 +2,8 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
+	"os"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
@@ -69,5 +71,11 @@ func handlerAPIGateway_POST(request events.APIGatewayProxyRequest) (events.APIGa
 }
 
 func main() {
-	lambda.Start(Handler_APIGateway)
+	// https://stackoverflow.com/questions/38393772/how-to-detect-if-im-running-in-aws-lambda-environment
+	if os.Getenv("LAMBDA_TASK_ROOT") != "" {
+		// LAMBDA_TASK_ROOT=/var/task
+		lambda.Start(Handler_APIGateway)
+	} else {
+		fmt.Println("dev mode")
+	}
 }
