@@ -2,6 +2,12 @@
 
 
 [[projects]]
+  name = "github.com/akrylysov/algnhsa"
+  packages = ["."]
+  revision = "1b2519a6df09142a48adb4377b70c1814925c0d2"
+  version = "v0.5"
+
+[[projects]]
   name = "github.com/aws/aws-lambda-go"
   packages = [
     "events",
@@ -15,6 +21,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "c065e48ca2166602e725613ecbb6e86249e53e82452feeb3b77c6c03c71b21e1"
+  inputs-digest = "4853166c90ec35a0df214ad7681f9a08d77a36ee4f0a1aa673d8d0d9c1a51d43"
   solver-name = "gps-cdcl"
   solver-version = 1
