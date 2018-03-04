@@ -9,6 +9,7 @@ import (
 	"os"
 
 	"github.com/akrylysov/algnhsa"
+	"github.com/if1live/asagi/asagi"
 	"gopkg.in/telegram-bot-api.v4"
 )
 
@@ -50,7 +51,11 @@ func handler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	dispatch(update)
+	updateStr, _ := json.Marshal(update)
+	fmt.Println(string(updateStr))
+
+	//fmt.Printf("update_id=%d message.text=%s", update.UpdateID, update.Message.Text)
+	asagi.Dispatch(update, bot)
 
 	w.Header().Set("Content-Type", "applicaiton/json")
 	type Response struct {
@@ -59,18 +64,4 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	resp := Response{true}
 	data, _ := json.Marshal(resp)
 	w.Write(data)
-}
-
-func dispatch(update tgbotapi.Update) {
-	cmdEcho(update)
-}
-
-func cmdEcho(update tgbotapi.Update) {
-	fmt.Printf("update_id=%d message.text=%s", update.UpdateID, update.Message.Text)
-
-	go func(update tgbotapi.Update) {
-		echoMsg := tgbotapi.NewMessage(update.Message.Chat.ID, update.Message.Text)
-		echoMsg.ReplyToMessageID = update.Message.MessageID
-		bot.Send(echoMsg)
-	}(update)
 }
