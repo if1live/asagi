@@ -16,7 +16,7 @@ func Dispatch(update tgbotapi.Update, bot *tgbotapi.BotAPI) {
 func dispatchMessage(update tgbotapi.Update, bot *tgbotapi.BotAPI) {
 	cmds := []commands.Command{
 		commands.NewEcho(update),
-		commands.NewTweetByShare(update),
+		commands.NewTweetLink(update),
 		// dev
 		commands.NewDevKeyboard(update),
 	}
